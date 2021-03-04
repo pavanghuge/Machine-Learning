@@ -1,0 +1,229 @@
+Check results
+=============
+
+E265:6:1:block comment should start with '# '
+E265:7:1:block comment should start with '# '
+E225:9:5:missing whitespace around operator
+E225:10:3:missing whitespace around operator
+E225:11:9:missing whitespace around operator
+E225:12:6:missing whitespace around operator
+E225:13:10:missing whitespace around operator
+E225:14:7:missing whitespace around operator
+E225:17:13:missing whitespace around operator
+E225:20:7:missing whitespace around operator
+E225:21:4:missing whitespace around operator
+E225:22:4:missing whitespace around operator
+E265:25:1:block comment should start with '# '
+E265:26:1:block comment should start with '# '
+E501:27:80:line too long (80 > 79 characters)
+E225:28:12:missing whitespace around operator
+E225:29:3:missing whitespace around operator
+E225:30:9:missing whitespace around operator
+E225:31:6:missing whitespace around operator
+E225:32:10:missing whitespace around operator
+E225:34:17:missing whitespace around operator
+E225:35:31:missing whitespace around operator
+E225:36:7:missing whitespace around operator
+E302:40:1:expected 2 blank lines, found 1
+E231:40:15:missing whitespace after ','
+E231:40:17:missing whitespace after ','
+E225:41:7:missing whitespace around operator
+E101:42:1:indentation contains mixed spaces and tabs
+W191:42:1:indentation contains tabs
+E113:42:2:unexpected indentation
+W191:43:1:indentation contains tabs
+W191:44:1:indentation contains tabs
+E265:46:1:block comment should start with '# '
+W291:46:20:trailing whitespace
+W191:49:1:indentation contains tabs
+E231:49:37:missing whitespace after ','
+E225:52:4:missing whitespace around operator
+E225:53:6:missing whitespace around operator
+E225:54:5:missing whitespace around operator
+E225:55:6:missing whitespace around operator
+E265:57:1:block comment should start with '# '
+W191:59:1:indentation contains tabs
+E711:59:25:comparison to None should be 'if cond is not None:'
+W191:60:1:indentation contains tabs
+E231:60:17:missing whitespace after ','
+E225:60:22:missing whitespace around operator
+E231:60:57:missing whitespace after ','
+E231:61:24:missing whitespace after ','
+E225:65:11:missing whitespace around operator
+E101:66:1:indentation contains mixed spaces and tabs
+E225:66:15:missing whitespace around operator
+E225:67:9:missing whitespace around operator
+W291:68:25:trailing whitespace
+E225:69:31:missing whitespace around operator
+E711:69:31:comparison to None should be 'if cond is not None:'
+E225:70:15:missing whitespace around operator
+E231:70:32:missing whitespace after ','
+E231:70:40:missing whitespace after ','
+E225:72:41:missing whitespace around operator
+E225:75:28:missing whitespace around operator
+W293:76:1:blank line contains whitespace
+E711:84:36:comparison to None should be 'if cond is not None:'
+E231:85:35:missing whitespace after ','
+E225:85:40:missing whitespace around operator
+E231:85:75:missing whitespace after ','
+E501:85:80:line too long (90 > 79 characters)
+E231:86:36:missing whitespace after ','
+E225:88:28:missing whitespace around operator
+E225:89:13:missing whitespace around operator
+E231:90:28:missing whitespace after ','
+W293:92:1:blank line contains whitespace
+E101:97:1:indentation contains mixed spaces and tabs
+W191:97:1:indentation contains tabs
+E711:97:25:comparison to None should be 'if cond is None:'
+W191:98:1:indentation contains tabs
+W191:99:1:indentation contains tabs
+E225:99:9:missing whitespace around operator
+W191:100:1:indentation contains tabs
+E231:100:22:missing whitespace after ','
+W191:101:1:indentation contains tabs
+W191:102:1:indentation contains tabs
+E231:102:22:missing whitespace after ','
+E265:103:1:block comment should start with '# '
+E302:105:1:expected 2 blank lines, found 1
+E101:106:1:indentation contains mixed spaces and tabs
+E221:106:10:multiple spaces before operator
+E265:109:1:block comment should start with '# '
+E225:110:3:missing whitespace around operator
+W291:110:18:trailing whitespace
+E225:111:2:missing whitespace around operator
+E231:112:17:missing whitespace after ','
+E231:112:23:missing whitespace after ','
+E225:113:9:missing whitespace around operator
+E225:115:4:missing whitespace around operator
+E225:116:6:missing whitespace around operator
+E231:116:18:missing whitespace after ','
+E231:116:20:missing whitespace after ','
+W291:116:27:trailing whitespace
+E225:117:9:missing whitespace around operator
+E225:118:11:missing whitespace around operator
+E231:119:30:missing whitespace after ','
+W391:121:1:blank line at end of file
+
+Code
+=============
+
+import sys
+import random
+import math
+
+#datafeatures= sys.argv[1]
+#f1=open(datafeatures)
+f1 = open("/Users/pavanghuge/Downloads/ML/Assignment3/ionosphere.data")
+data=[]
+l1=f1.readline()
+while(l1!=''):
+    s= l1.split()
+    s_len=len(s)
+    l2=[]
+    for i in range(s_len):
+        l2.append(float(s[i]))
+        if(i==s_len-1):
+            l2.append(float(1))
+    data.append(l2)
+    l1=f1.readline()
+row=len(data)
+col=len(data[0])
+f1.close()
+
+#trainlabel= sys.argv[2]
+#f2=open(trainlabel)
+f2 = open("/Users/pavanghuge/Downloads/ML/Assignment3/ionosphere.trainlabels.0")
+trainlabels={}
+l3=f2.readline()
+while(l3!=''):
+    p=l3.split()
+    p_len=len(p)
+    trainlabels[int(p[1])] = int(p[0])
+    if int(p[0])== 0:
+        trainlabels[int(p[1])]= -1
+    l3=f2.readline()
+f2.close()
+
+# Dot Product Function
+def dot_Prod(m,n,c):
+    dp=0
+	for j in range(0, c, 1):
+		dp += m[j]*n[j]
+	return dp
+
+#Initialize Weights 
+weights = [0]*col
+for j in range(0, col, 1):
+	weights[j] = (random.uniform(-0.001,0.001))
+print(" intial weights=> ", weights)
+
+eta=0.001
+theta=0.001
+cond=0
+error=0
+
+#Initialize error
+for i in range(0, row, 1):
+	if (trainlabels.get(i) != None):
+		error += max(0,(1 -trainlabels.get(i)*dot_Prod(weights,data[i], col)))
+print("Initial Error=>",error)
+
+counter = 0
+
+while(cond!=1):
+    counter +=1
+    delf=[0]*col
+    for i in range(row):  
+        if (trainlabels.get(i)!=None):
+            dp=dot_Prod(weights,data[i],col)
+            for j in range(col):
+                if(dp*trainlabels.get(i)<1):
+                    delf[j] += -1*data[i][j]*trainlabels.get(i)
+                else:
+                    delf[j]+= 0
+    
+# New Weights
+        for j in range(0, col, 1):
+            weights[j] = weights[j] - eta*delf[j]
+
+# New Error
+        new_error = 0
+        for i in range(0, row, 1):
+            if (trainlabels.get(i) != None):
+                new_error += max(0,(1 -trainlabels.get(i)*dot_Prod(weights,data[i], col)))
+                print("new_error: ",new_error)
+
+    if abs(error-new_error)<theta:
+        cond=1
+        print("Error Diff:",error-new_error)
+    error = new_error
+    
+print("Predicted Row ID")
+print("Output")
+# Prediction
+for i in range(0, row, 1):
+	if (trainlabels.get(i) == None):
+		d_p = dot_Prod(weights, data[i], col)
+		if(d_p>0):
+			print("   1      ",i)
+		else:
+			print("   0      ",i)
+#distance from origin
+
+def List_Transpose(m):
+    Trans  = [m[i] for i in range(len(m))]
+    return Trans
+
+#w0 for calculation of distance from origin as it is weight for intercept
+w0=weights[col-1] 
+w=[0]*(col-1)
+for j in range(0,col-1,1):
+    w[j]= weights[j]
+
+w_t=List_Transpose(w)
+w_p =dot_Prod(w_t,w,col-1) 
+dist_org=0
+dist_org =w0/(w_p**0.5)
+print("Distance from Origin=",dist_org)
+
+
