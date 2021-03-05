@@ -4,10 +4,7 @@ from Scratch
  Introduction to Machine learning
 
 
-Assignment 1
-Kernel nearest means
-09/16/2019	Nearest means in Python (part 1)
-Nearest means in Python (part 2)
+Assignment 1: Kernel nearest means
 
 Assignment 2: Implement gradient descent for least squares
 
