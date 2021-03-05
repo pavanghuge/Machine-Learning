@@ -1,8 +1,4 @@
-# Machine-Learning: These Assignments contain the following Alogorithms for Machine Learning
-from Scratch
-
- Introduction to Machine learning
-
+# Machine-Learning: These Assignments contain the following Alogorithms for Machine Learning from Scratch
 
 Assignment 1: Kernel nearest means
 
